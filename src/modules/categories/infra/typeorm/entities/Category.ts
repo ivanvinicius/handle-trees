@@ -1,7 +1,16 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+  Entity,
+  Tree,
+  Column,
+  PrimaryColumn,
+  TreeChildren,
+  TreeParent,
+  TreeLevelColumn,
+} from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
 @Entity('categories')
+@Tree('materialized-path')
 class Category {
   constructor(props: Omit<Category, 'id'>, id?: string) {
     Object.assign(this, props);
@@ -14,17 +23,17 @@ class Category {
   @PrimaryColumn('uuid')
   readonly id: string;
 
+  @TreeLevelColumn()
+  parent_id: string;
+
   @Column('varchar')
   name: string;
 
-  @Column('uuid')
-  parentId: string;
-
-  @ManyToOne(() => Category, category => category.children)
-  parent: Category;
-
-  @OneToMany(() => Category, category => category.parent)
+  @TreeChildren()
   children: Category[];
+
+  @TreeParent()
+  parent: Category;
 }
 
 export { Category };
