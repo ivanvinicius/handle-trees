@@ -8,6 +8,7 @@ import {
   TreeLevelColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import { Exclude } from 'class-transformer';
 
 @Entity('categories')
 @Tree('materialized-path')
@@ -23,11 +24,14 @@ class Category {
   @PrimaryColumn('uuid')
   readonly id: string;
 
-  @TreeLevelColumn()
-  parent_id: string;
-
   @Column('varchar')
   name: string;
+
+  @TreeLevelColumn()
+  @Exclude()
+  parent_id: string;
+
+  mpath: string;
 
   @TreeChildren()
   children: Category[];

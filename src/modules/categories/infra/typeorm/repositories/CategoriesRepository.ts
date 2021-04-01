@@ -1,4 +1,4 @@
-import { TreeRepository, getTreeRepository } from 'typeorm';
+import { TreeRepository, getTreeRepository, IsNull } from 'typeorm';
 
 import { ICategoriesRepository } from '@modules/categories/repositories/ICategoriesRepository';
 import { Category } from '../entities/Category';
@@ -11,7 +11,9 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 
   public async findAll(): Promise<Category[] | undefined> {
-    return this.ormTreeRepository.findTrees();
+    return this.ormTreeRepository.find({
+      where: { parent_id: IsNull() },
+    });
   }
 }
 

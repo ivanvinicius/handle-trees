@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import { ListCategoriesService } from '../../../services/ListCategoriesService';
 
@@ -9,7 +10,7 @@ class CategoriesController {
 
     const categories = await listCategories.run();
 
-    return response.json(categories);
+    return response.json({ categories: classToClass(categories) });
   }
 }
 
