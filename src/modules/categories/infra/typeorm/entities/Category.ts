@@ -33,7 +33,7 @@ class Category {
 
   mpath: string;
 
-  @TreeChildren()
+  @TreeChildren({ cascade: true })
   children: Category[];
 
   @TreeParent()

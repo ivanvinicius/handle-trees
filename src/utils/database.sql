@@ -19,6 +19,20 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 
+CREATE TABLE states (
+	id uuid NOT NULL,
+  	name varchar NOT NULL,
+  	CONSTRAINT pk_states PRIMARY KEY (id)
+)
+
+CREATE TABLE cities (
+	id uuid NOT NULL,
+  	name varchar NOT NULL,
+  	state_id uuid DEFAULT NULL,
+  	CONSTRAINT pk_cities PRIMARY KEY (id)
+)
+
+
 -- agrotóxicos
 
 INSERT INTO categories (id,  name, parent_id) VALUES (

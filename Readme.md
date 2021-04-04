@@ -7,4 +7,6 @@
 3. Download the dependencies
 4. To run api on port localhost/3333: `yarn dev:server`
 
+obs: project has insomnia request inside utils folder
+
 ##### Ivan
